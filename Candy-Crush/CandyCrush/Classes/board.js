@@ -7,6 +7,7 @@ class Board {
 
         // Manage active transitions
         this.currentTransitionWaitInterval;
+        this.currentTransitionFinishedTimeout;
     }
 
     init() {
@@ -49,28 +50,32 @@ class Board {
         return activeTransition;
     }
 
-    awaitActiveTransitions(callback, delay=2) {
+    playerCanMove() {
+        return (this.currentTransitionFinishedTimeout == null && this.currentTransitionWaitInterval == null);
+    }
+
+    awaitActiveTransitions(callback, delay=0.25) {
         if (this.currentTransitionWaitInterval) {
             clearInterval(this.currentTransitionWaitInterval);
+            clearTimeout(this.currentTransitionFinishedTimeout);
         }
 
         let that = this;
         this.currentTransitionWaitInterval = setInterval(() => {
             if (that.getActiveTransitions().length <= 0) {
                 clearInterval(this.currentTransitionWaitInterval);
-                this.currentTransitionWaitInterval = null;
-                if (delay) {
-                    let id = Math.floor(Math.random() * 1000);
-                    console.log('Finished and waiting to return', id)
-                    setTimeout(() => {
-                        console.log(this.currentTransitionWaitInterval, id);
-                        if (!this.currentTransitionWaitInterval) {
-                            callback();
-                        }
-                    }, delay * 1000);
-                } else {
+                if (!delay) {
+                    this.currentTransitionWaitInterval = null;
+                    this.currentTransitionFinishedTimeout = null;
                     callback();
+                    return;
                 }
+
+                this.currentTransitionFinishedTimeout = setTimeout(() => {
+                    this.currentTransitionFinishedTimeout = null;
+                    this.currentTransitionWaitInterval = null;
+                    callback();
+                }, delay * 1000);
             }
         }, 10);
     }
