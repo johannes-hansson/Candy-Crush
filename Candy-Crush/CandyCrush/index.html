@@ -8,13 +8,22 @@
     <title>Candy Crush</title>
 </head>
 <body>
-    <canvas id="main-canvas"></canvas>
+   
+    <canvas id="main-canvas" style="display:none"></canvas>
+    <div id="start_screen" class="screen" style="display:block">
+        <div id="title">Candy Crush 2.0</div>
+        <button onclick='startgame();'>   Start   </button>
+        </div>
+        <div id="reload" style="display:none">
+        <button onclick="reload();">Reload</button>
+    </div>
 
     <!-- Classes -->
     <script src="Classes/transition.js"></script>
     <script src="Classes/tile.js"></script>
     <script src="Classes/board.js"></script>
     <!-- || -->
+    
 
     <script src="main.js"></script>
 </body>
