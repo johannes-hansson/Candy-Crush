@@ -12,7 +12,12 @@ class StyleSettings {
         this.tileColors = {
             1: 'green',
             2: 'red',
-            3: 'blue'
+            3: 'blue',
+            4: 'magenta'
+            // 5: 'orange',
+            // 6: 'yellow',
+            // 7: 'aquamarine',
+            // 8: 'blanchedalmond'
         }
     }
 }
@@ -58,6 +63,7 @@ class Game {
     }
 
     onMouseDown(mouse) {
+        if (!this.board.playerCanMove()) return;
         const [x, y] = this.board.getTilePositionFromMouse(mouse);
         if (!this.board.positionIsInBounds(x, y)) return;
 
@@ -76,7 +82,8 @@ class Game {
 
         const BOTH_POSITIONS_HAVE_TILES = (this.board.getTileAt(lastX, lastY) != null && this.board.getTileAt(x, y) != null);
         const TILES_ARE_CLOSE = (Math.abs(x - this.lastPositionClicked[0]) + Math.abs(y - this.lastPositionClicked[1])) == 1;
-        if (BOTH_POSITIONS_HAVE_TILES && TILES_ARE_CLOSE) {
+        const PLAYER_CAN_MOVE = this.board.playerCanMove();
+        if (BOTH_POSITIONS_HAVE_TILES && TILES_ARE_CLOSE && PLAYER_CAN_MOVE) {
             let tile1 = this.board.getTileAt(lastX, lastY);
             let tile2 = this.board.getTileAt(x, y);
 
