@@ -133,6 +133,26 @@ let game = new Game();
 game.init();
 game.mainLoop();
 
+function start(){
+    this.togglescreen("start_screen", false);
+    this.togglescreen("main-canvas", true);
+    this.togglescreen("reload", true);
+}
+
+function startgame(){  //hela startskärmen
+    start();
+}
+
+function togglescreen (id,toggle){
+    let e = document.getElementById(id);
+    let display = (toggle) ? 'block':'none';  //True= block, false = none
+    e.style.display = display;
+}
+
+function reload(){ //relaods the point system. Makes the board change
+    console.log("hello world");
+}
+
 // canvas.addEventListener('mousedown', function(event) {
 //     game.clickToPlace(event, Math.floor(Math.random() * 2) + 1);
 // })
