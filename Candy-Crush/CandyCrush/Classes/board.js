@@ -4,6 +4,7 @@ class Board {
         this.width = 12;
         this.height = 8;
         this.grid;
+        this.point = 0;
 
         // Manage active transitions
         this.currentTransitionWaitInterval;
@@ -179,7 +180,7 @@ class Board {
             combosFound.push(currentComboList);
         }
 
-        return combosFound;
+        return combosFound;   
     }
 
     getAllCombos() {
@@ -202,16 +203,25 @@ class Board {
 
     clearCombos() {
         let [verticalCombos, horizontalCombos] = this.getAllCombos();
-
         let that = this;
         verticalCombos.forEach((combo) => {
-            that.breakCombo(combo);
+            for(let i=0;i<this.height;i++){ //point system vertical
+                if(combo.length==i){
+                    this.point=this.point+40*i;  //every candy is worth 40 points
+                }
+            } 
+            that.breakCombo(combo);    
         });
         horizontalCombos.forEach((combo) => {
+            for(let i=0;i<this.width;i++){  //point system horizontal
+                if(combo.length==i){
+                    this.point=this.point+40*i; 
+                }
+            } 
             that.breakCombo(combo);
         });
-
-        this.dropTiles();
+        this.dropTiles();   
+        console.log(this.point);
     }
 
     switchTiles(x1, y1, x2, y2) {
@@ -256,3 +266,4 @@ class Board {
         });
     }
 }
+
