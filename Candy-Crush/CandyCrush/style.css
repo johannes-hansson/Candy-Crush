@@ -8,9 +8,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
+    background-image: url("amit-lahav-LU_fCezP9-o-unsplash.jpg");
+    background-size: cover;
 }
 
 canvas {
     background-color: lightgray;
 }
+#reload{
+    position: absolute;
+    left:0px;
+    top:0px;
+}
+#start_screen{
+    display:flex;
+    flex-direction:column;
+    align-content: center;
+}
+#start_screen div{
+    background-color: rgb(67, 213, 89);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+}
+#start_screen button{
+    background-color: rgb(67, 213, 89);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
